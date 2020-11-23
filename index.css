@@ -7,12 +7,10 @@
 }
 
 body {
-    height: 100vh;
-    width: 100vw;
+    min-height: 100vh;
 }
 
 header {
-    width: 100vw;
     height: 10vh;
     background-color: #49567A;
     font-family: 'Anton', sans-serif;
@@ -51,8 +49,6 @@ header {
 }
 
 main {
-    width: 100vw;
-    height: 80vh;
     background-color: whitesmoke;
 }
 
@@ -96,8 +92,8 @@ h1 {
 
 }
 
-section {
-    height: 80%;
+.section_profil {
+    height: 71vh;
     width: 100%;
     display: flex;
     justify-content: center;
@@ -106,17 +102,7 @@ section {
     background-repeat: no-repeat;
 }
 
-form {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    align-items: center;
-    height: 100%;
-    width: 60%;
-    font-size: 50px;
-    background-color: rgba(19, 19, 73, 0.5);
-    color: aliceblue;
-}
+
 
 
 .alerte {
@@ -132,6 +118,7 @@ footer {
     flex-direction: row;
     justify-content: space-around;
     align-items: center;
+    background-color: #49567A;
 
 }
 
@@ -141,11 +128,104 @@ input {
     font-size: 50px;
 }
 
-
-
-
 .foot {
     height: 100%;
     width: 100%;
     display: flex;
+}
+
+/*livreor*/
+.block_container {
+    display: flex;
+    justify-content: center;
+    padding-bottom: 50px;
+}
+
+.section_commentaire {
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.th_pseudo {
+    text-align: center;
+    padding: 20px;
+    font-family: "livreor_pseudo";
+    font-size: 30px;
+    width: 40vh;
+
+}
+
+/*en vh pour que commentaire puisse prendre de la place en etant centré*/
+
+
+.td_date {
+    border: black 1px solid;
+    border-collapse: collapse;
+    padding: 20px;
+    text-align: center;
+
+
+}
+
+.td_commentaire {
+    border: black 1px solid;
+    border-collapse: collapse;
+    width: 90%;
+    padding: 20px;
+}
+
+/*form*/
+
+.section_form {
+    display: flex;
+    justify-content: center;
+}
+
+.section_form_commentaire {
+    height: 80vh;
+    display: flex;
+    justify-content: center;
+}
+
+
+.form_edit {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    height: 91%;
+    width: 60%;
+    font-size: 50px;
+    background-color: rgba(19, 19, 73, 0.5);
+    color: aliceblue;
+    padding: 30px;
+}
+
+#text-commentaire {
+    font-size: 20px;
+}
+
+/*FONT*/
+@font-face {
+    font-family: "livreor_pseudo";
+    src: url("font/livreor_pseudo/Brightness.ttf");
+
+}
+
+#main_index {
+    height: 80vh;
+}
+
+#main_inscription {
+    height: 80vh;
+}
+
+#main_connexion {
+    height: 80vh;
+}
+
+.submit_margintop {
+    margin-top: 20px;
 }

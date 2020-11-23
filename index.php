@@ -9,6 +9,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="index.css">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
 </head>
 
 <body>
@@ -28,7 +30,7 @@
             <li><a href="livre-or.php">Livre d'or</a></li>
         </ul>
     </header>
-    <main>
+    <main id="main_index">
         <h1>Bienvenue</h1>
 
         <div class="cadre">
@@ -47,7 +49,8 @@
     </main>
     <?php
    
-    if (isset($_SESSION['isconnected']) && $_SESSION['isconnected'] === true) {
+    if (isset($_SESSION['isconnected']) && $_SESSION['isconnected'] === true) 
+    {
         echo "<footer>";
         echo "<p> Bonjour " . $_SESSION['utilisateur'] . "</p>";
         echo " <form method=post>";
@@ -58,8 +61,9 @@
             session_destroy();
             header("Location: index.php");
         }
-      
-    } else {
+    } 
+    else 
+    {
         echo <<<HTML
         <footer>
         <ul id="menu-deroulant" class="foot">

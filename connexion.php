@@ -1,3 +1,7 @@
+<?php
+                session_start();
+
+?>
 <!DOCTYPE html>
 <html lang="fr">
 
@@ -6,6 +10,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="index.css">
+
 </head>
 
 <body>
@@ -25,11 +30,11 @@
             <li><a href="livre-or.php">Livre d'or</a></li>
         </ul>
     </header>
-    <main>
+    <main id="main_connexion">
         <H1> Connexion : </H1>
-        <section>
+        <section class="section_form">
 
-        <form method="post" action="connexion.php">
+        <form method="post" action="connexion.php" class="form_edit">
 
 <label for="identifiant">Identifiant</label>
 <input type="text" id="identifiant" name="identifiant" placeholder="Dupont" required>
@@ -37,7 +42,7 @@
 <label for="password">Mot de passe</label>
 <input type="password" id="password" name="password" placeholder="*******" required>
 
-<input type="submit" id="submit_inscription" name="connect">
+<input type="submit" class="submit_margintop" id="submit_inscription" name="connect">
 
 </form> 
 
@@ -104,7 +109,7 @@ if (isset($_POST['connect'])){ // si on appuie sur envoyer
         // var_dump(password_verify($password, $result['password']));
 
             if(password_verify($password, $result['password'])){
-                session_start();
+                
                 $_SESSION['utilisateur'] = $identifiant;
                 $_SESSION['isconnected'] = true;
                 $utilisateur = $_SESSION['utilisateur']; 
@@ -113,7 +118,7 @@ if (isset($_POST['connect'])){ // si on appuie sur envoyer
                 $all_result = mysqli_fetch_row($query);
                 $id = $all_result[0]; // id = la case 0 du tableau fetch 
                 $_SESSION['id_utilisateur'] = $id;
-                
+            
                 header('Location: index.php');
             }
         }
@@ -123,7 +128,6 @@ if (isset($_POST['connect'])){ // si on appuie sur envoyer
          $_SESSION['isconnected'] = false;
     }
 }
-var_dump($_SESSION);
 
 ?>
 </html>

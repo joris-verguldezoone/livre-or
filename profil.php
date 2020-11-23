@@ -30,47 +30,44 @@ session_start();
     </header>
     <main>
         <H1>Modifie tes identifiants</H1>
-        <section>
+        <section class="section_profil">
 
-            <form method="post">
-                <div class="ligne">
+            <form method="post" action="" class="form_edit">
                     <label for="login">Nouvel identifiant :</label>
-                    <input type="text" id="identifiant" name="login" placeholder="ex:Habib" required>
-                </div>
-                <div class="ligne">
+                    <input type="text" id="identifiant" name="identifiant" placeholder="ex:Habib" required>
                     <label for="password">Nouveau mot de passe :</label>
                     <input type="password" name="password" placeholder="*******" required>
-                </div>
-                <div class="ligne">
                     <label for="password_confirm">Confirmation du nouveau mot de passe : </label>
-                    <input type="password" name="ConfirmPassword" placeholder="*******" required>
-                </div>
+                    <input type="password" name="confirmpassword" placeholder="*******" required>
                 <input type="submit" name="register">
             </form>
         </section>
         <div class="alerte">
         <?php
-$bdd = mysqli_connect('localhost', 'root', '', 'livreor');  // je me connecte a ma bdd a voir si c"est utile -> mettre un require(config.php)
+        $bdd = mysqli_connect('localhost', 'root', '', 'livreor');  // je me connecte a ma bdd a voir si c"est utile -> mettre un require(config.php)
                                                             // ou y'a la connection au server
-        if (isset($_POST['submit'])){ 
+        if (isset($_POST['register'])){ 
         
             $n_identifiant = $_POST['identifiant'];
             $n_identifiant = mysqli_real_escape_string($bdd, htmlspecialchars(trim($n_identifiant)));
             $n_password = $_POST['password'];
             $n_password = mysqli_real_escape_string($bdd, htmlspecialchars(trim($n_password)));
+            $confirmpassword = $_POST['confirmpassword'];
+            $confirmpassword = mysqli_real_escape_string($bdd, htmlspecialchars(trim($confirmpassword)));
             $cryptedpass = password_hash($n_password, PASSWORD_BCRYPT); // valeur utilisé dans les requetes
 
             $utilisateur = $_SESSION['utilisateur'];
 
             $sql_select = "SELECT id FROM utilisateurs WHERE login = '$utilisateur'"; // on prend la clé du compte
-            var_dump($sql_select);
 
             $query = mysqli_query($bdd, $sql_select);// $query prend le résultat de la requete id
             $all_result = mysqli_fetch_row($query); // on stock le résultat dans un tableau
             $compteur = count($all_result); //on compte le nbr de valeur 
-            var_dump($all_result);
-            var_dump($compteur);
-            if ($compteur == 1) { // normalement y'a que id car on SELECT id dans la requete 
+            
+
+            $verification = mysqli_query($bdd, "SELECT login FROM utilisateurs WHERE login = '$n_identifiant'"); // on recherche si l'identifiant existe déjà 
+
+            if ($compteur == 1 && $confirmpassword == $n_password && !mysqli_num_rows($verification)) { // normalement y'a que id car on SELECT id dans la requete 
                 $id = $all_result[0]; // id = la case 0 du tableau fetch 
                 $sql_update = "UPDATE utilisateurs SET login='$n_identifiant',password='$cryptedpass' WHERE id=$id";
                 // voir si ça update meme si on écrit rien
@@ -79,10 +76,12 @@ $bdd = mysqli_connect('localhost', 'root', '', 'livreor');  // je me connecte a 
                 echo 'Changement accepté, veuillez vous reconnecter';
                 $_SESSION['utilisateur'] = $n_identifiant;
                 
-
-                var_dump($_SESSION);
+            }
+            else{
+                echo '<p style="text-align:center">confirmation du mot de passe incorrect ou identifiant déjà utilisé</p>';
             }
         }
+      
 
 ?>
         </div>

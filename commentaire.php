@@ -17,7 +17,7 @@ session_start();
             <?php
             if (isset($_SESSION['isconnected']) && $_SESSION['isconnected'] === true) {
                 echo <<<HTML
-            <li><a href="profil.php">Profil</a>
+            <li><a href="profil.php">Profil</a><li>
             <li><a href="commentaire.php">Commentaire</a></li>
 
             HTML;
@@ -28,35 +28,38 @@ session_start();
         </ul>
     </header>
     <main>
-    <label for="commentaire">Commentaire</label>
-<input type="textarea" name="commentaire" id="text-commentaire" placeholder="Oulala rien ne va plus je pete un boulon">
-<input type="submit" name="submit" value="Poster">
+        <section class="section_form_commentaire">
+    <form action="" method="post" class="form_edit">
+        <label for="commentaire">Commentaire</label>
+        <textarea rows="15" cols="70" name="commentaire" id="text-commentaire" placeholder="Oulala rien ne va plus je pete un boulon"></textarea>
+        <input type="submit" name="submit" value="Poster">
+    </form>
+        </section>
     <?php
     $bdd = mysqli_connect('localhost', 'root', '', 'livreor');// je me connecte a ma bdd
 
-
-    if (isset($_POST['submit']))
+    // $submit = $_POST['submit'];
+    // $submit = mysqli_real_escape_string($bdd,trim($submit));
+    // if (isset($submit))
+    if(isset($_POST['submit']))
     { //si on appuie sur envoyer, $_POST prend un nouveau prénom dans son tableau 
+
         $commentaire = $_POST['commentaire'];
         $commentaire = mysqli_real_escape_string($bdd,trim($commentaire));
         // $_SESSION['commentaire_id'] = $_SESSION['utilisateur'] . "<br />" . $_POST['commentaire']; // a = a+b 
 
-        echo $_SESSION['utilisateur'];
         $today = date("Y-m-j H:i:s");  
-        echo $today;
         echo $_SESSION['id_utilisateur'];
     
         $sql_commentaire = "INSERT INTO commentaires (commentaire, id_utilisateur, date) VALUES('" . $commentaire . "', '" . intval($_SESSION['id_utilisateur'])."','". $today . "')";
-        echo $sql_commentaire;
         mysqli_query($bdd, $sql_commentaire);
-
+        echo "Votre commentaire à bien été envoyé";
     }
 
   // bdd > id	commentaire	id_utilisateur	date
-
-    ?>
+?>
     </main>
-    <?php
+<?php
 
 
 

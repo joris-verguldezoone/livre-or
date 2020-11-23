@@ -25,25 +25,25 @@
             <li><a href="livre-or.php">Livre d'or</a></li>
         </ul>
     </header>
-    <main>
+    <main id="main_inscription">
 
         <h1>Inscription : </h1>
 
-        <section class="inscription">
-        <form method="post" action="inscription.php">
+        <section class="section_form">
+            <form method="post" class="form_edit" action="inscription.php">
 
-<label for="identifiant">Identifiant</label>
-<input type="text" id="identifiant" name="identifiant" placeholder="Dupont" required>
+                <label for="identifiant">Identifiant</label>
+                <input type="text" id="identifiant" name="identifiant" placeholder="Dupont" required>
 
-<label for="password">Mot de passe</label>
-<input type="password" id="password" name="password" placeholder="*******" required>
+                <label for="password">Mot de passe</label>
+                <input type="password" id="password" name="password" placeholder="*******" required>
 
-<label for="confirmation_mdp">Confirmation du mot de passe</label> 
-<input type="password" id="confirmation_password" name="confirmation_mdp" placeholder="*******" required>
+                <label for="confirmation_mdp">Confirmation du mot de passe</label> 
+                <input type="password" id="confirmation_password" name="confirmation_mdp" placeholder="*******" required>
 
-<input type="submit" id="submit_inscription" name="register">
+                <input type="submit" class="submit_margintop" id="submit_inscription" name="register">
 
-</form>
+            </form>
         </section>
         <div class="alerte">
         <?php 
